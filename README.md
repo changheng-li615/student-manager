@@ -7,3 +7,21 @@ A full-stack web application for managing student records, built with:
 - Deployment (Planned): Vercel (frontend) + Render (backend)
 
 ## Project Structure
+
+- student-manager/
+  ├── client/ # Frontend (React + Tailwind)
+  └── server/ # Backend (Node.js + Express) ← coming soon
+
+## Current Features
+
+- Login and registration forms with validation
+- React Router based page navigation
+- Tailwind-based responsive UI
+- GitHub version control
+
+## Upcoming
+
+- RESTful API for user auth and student CRUD
+- JWT login token
+- MongoDB database integration
+- Live demo deployment
