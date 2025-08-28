@@ -1,26 +1,21 @@
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+/* import { useNavigate } from "react-router-dom";
+import { useEffect } from "react"; */
+import Sidebar from "../components/Sidebar";
 
 function Dashboard() {
-  const navigate = useNavigate();
+  /* const navigate = useNavigate();
 
   const handleLogout = () => {
 
     navigate("/login");
-  };
+  }; */
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white flex items-center justify-center px-4">
-      <div className="bg-gray-950 p-8 rounded-xl shadow-lg w-full max-w-2xl border border-gray-700">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl font-semibold tracking-wide">Welcome, Student Admin</h1>
-          <button
-            onClick={handleLogout}
-            className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-sm font-medium"
-          >
-            Logout
-          </button>
-        </div>
+    <div className="flex min-h-screen bg-gray-950 text-white">
+      <Sidebar />
+
+      <main className="flex-1 p-8">
+        <h1 className="text-3xl font-bold mb-6">Welcome to the Dashboard</h1>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 text-center">
           <div className="bg-gray-800 p-6 rounded-lg shadow border border-gray-700">
@@ -38,7 +33,7 @@ function Dashboard() {
             <p className="text-sm text-gray-400">Failed</p>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
