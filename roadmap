@@ -1,0 +1,50 @@
+Project: Student Manager (Full-stack Web App) Stack: React + Tailwind + Node.js + Express + MongoDB
+==================== CURRENT STATUS ====================
+Completed:
+
+- React project setup (Vite)
+- Tailwind CSS configuration
+- React Router (multi-page navigation)
+- Pages: Login, Register, Dashboard, Students
+- Sidebar layout - Static student table (mock data)
+  ==================== NEXT DEVELOPMENT PLAN ====================
+  PHASE 1 — FRONTEND CORE
+
+1.  Add Student - Create modal or form component - Use useState to manage input - Fields: name, email, course - Add new student to state array
+2.  Frontend CRUD - Add student - Delete student - Edit student (basic) - Update UI dynamically
+3.  Form Validation - Required fields - Email format check - Show error messages
+4.  UI Improvement - Better spacing & layout - Button hover effects - Loading / empty states
+    ====================
+    PHASE 2
+    — FRONTEND STRUCTURE
+5.  Component Refactor - Extract StudentTable component - Extract StudentForm component - Keep code modular
+6.  State Management - Lift state up (students stored in parent) - Pass props between components
+7.  Navigation UX - Redirect after login - Protect dashboard route (basic)
+    ====================
+    PHASE 3 — BACKEND SETUP
+8.  Create server/ - Initialize Node.js project - Install Express
+9.  Basic API - POST /register - POST /login - GET /students - POST /students - DELETE /students/:id
+10. MongoDB Setup - Use MongoDB Atlas - Create Student model - Store real data
+    ====================
+    PHASE 4 — AUTHENTICATION
+11. JWT Authentication - Generate token on login - Store token in frontend - Send token with requests
+12. Protected Routes - Only logged-in users can access dashboard/students
+    PHASE 5 — FULL INTEGRATION
+13. Connect Frontend + Backend - Replace mock data with API calls - Use axios/fetch - Handle loading & errors
+14. Persistent Data - Students saved in database - Data stays after refresh
+    ==================== PHASE 6 — POLISH & DEPLOY
+15. UI Polish - Clean layout - Better colors / spacing - Optional icons
+16. Deployment - Frontend: Vercel - Backend: Render / Railway - Database: MongoDB Atlas
+17. README Update - Features - Tech stack - Demo link - Screenshots
+    ==================== PHASE 7 — BONUS(optional)
+18. Search & Filter - Search by name - Filter by course
+19. Pagination - Handle large student lists
+20. Dark/Light Mode - Toggle theme
+    ==================== FINAL GOAL ====================
+    A full-stack Student Management App with:
+
+- Authentication (login/register)
+- Dashboard UI
+- Student CRUD
+- Database integration
+- Clean UI

@@ -26,17 +26,6 @@ function Sidebar() {
       >
         Students
       </NavLink>
-
-      <NavLink
-        to="/settings"
-        className={({ isActive }) =>
-          `text-sm font-medium hover:text-blue-400 transition ${
-            isActive ? "text-blue-500" : "text-gray-300"
-          }`
-        }
-      >
-        Settings
-      </NavLink>
     </div>
   );
 }

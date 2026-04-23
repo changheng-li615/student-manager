@@ -1,15 +1,6 @@
-/* import { useNavigate } from "react-router-dom";
-import { useEffect } from "react"; */
 import Sidebar from "../components/Sidebar";
 
 function Dashboard() {
-  /* const navigate = useNavigate();
-
-  const handleLogout = () => {
-
-    navigate("/login");
-  }; */
-
   return (
     <div className="flex min-h-screen bg-gray-950 text-white">
       <Sidebar />
