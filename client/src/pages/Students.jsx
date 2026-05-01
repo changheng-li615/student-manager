@@ -3,6 +3,7 @@ import { useState } from "react";
 import StudentForm from "../components/StudentForm";
 
 function Students() {
+  // recent student data
   const [students, setStudents] = useState ([
     { id: 1, name: "Alice Johnson", email: "alice@example.com", course: "Software Engineering" },
     { id: 2, name: "Brian Lee", email: "brian@example.com", course: "Computer Science" },
@@ -11,8 +12,16 @@ function Students() {
 
   const [ showForm, setShowForm ] = useState(false);
 
+  // add students
   const handleAddStudent = (newStudent) => {
     setStudents((prevStudents)=> [...prevStudents, newStudent]);
+  };
+
+  // delete students
+  const handleDeleteStudent = (id) => {
+    setStudents((prevStudents) =>
+      prevStudents.filter((student) => student.id !== id)
+    );
   };
 
   return (
@@ -44,6 +53,7 @@ function Students() {
                 <th className="px-6 py-4">Name</th>
                 <th className="px-6 py-4">Email</th>
                 <th className="px-6 py-4">Course</th>
+                <th classNmae="px-6 py-4">Actions</th>
               </tr>
             </thead>
 
@@ -56,6 +66,15 @@ function Students() {
                   <td className="px-6 py-4 font-medium">{student.name}</td>
                   <td className="px-6 py-4 text-gray-300">{student.email}</td>
                   <td className="px-6 py-4 text-gray-300">{student.course}</td>
+                  <td classNmae="px-6 py-4">
+                    <button
+                      type="button"
+                      onClick={()=> handleDeleteStudent(student.id)}
+                      className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded-md text-sm transition"
+                      >
+                        delete
+                      </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
