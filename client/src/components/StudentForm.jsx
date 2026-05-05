@@ -1,24 +1,57 @@
 import { useState } from "react";
 
-function StudentForm({ onAddStudent, onClose }) {
+//responsible for user input
+//provide students data to student compoent
+function StudentForm({ onAddStudent, onUpdateStudent, editingStudent, onClose }) {
+  // if editingstudent exists, use its data
+  // if not use empity value for add
     const [ formData, setFormData ] = useState({
-        name: "",
-        email: "",
-        course: "",
+        name: editingStudent ? editingStudent.name : "",
+        email: editingStudent ? editingStudent.email : "",
+        course: editingStudent ? editingStudent.course : "",
     });
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+    // save error message
+    // show the errors if exist
+    const [error, setError] = useState("");
 
-        setFormData((prev)=>({
-            ...prev,
-            [name]: value,
-        }));
+    const isEditMode = editingStudent !== null;
+
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+
+      //when user start reinput, clean the prev error
+      setError("");
     };
 
+    // triggger when submited
     const handleSubmit = (e) => {
+
         e.preventDefault();
+      
+        //trim() used to delete the space at the end and start
+        const trimmedName = formData.name.trim();
+        const trimmedEmail = formData.email.trim();
+        const trimmedCourse = formData.course.trim();
+
+        if (!trimmedName || !trimmedCourse || !trimmedEmail){
+          setError("All fields are required to imput.");
+          return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(trimmedEmail)) {
+          setError("Please enter a valid email address.");
+          return;
+        }
         
+        //CREATE student data
         const newStudent = {
             id: Date.now(),
             name: formData.name,
@@ -28,12 +61,17 @@ function StudentForm({ onAddStudent, onClose }) {
 
         onAddStudent(newStudent);
 
+        //clear studentForm
         setFormData({
             name: "",
             email: "",
             course: "",
         });
-
+        
+        //clear error message
+        setError("")
+        
+        //close pop alter
         onClose();
     };
 
@@ -78,6 +116,12 @@ function StudentForm({ onAddStudent, onClose }) {
               className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
+
+          {error &&(
+            <p className="text-red-400 text-sm">
+              {error}
+            </p>
+          )}
 
           <div className="flex justify-end gap-3 pt-2">
             <button
