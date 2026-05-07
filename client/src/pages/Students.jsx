@@ -3,18 +3,23 @@ import { useState } from "react";
 import StudentForm from "../components/StudentForm";
 
 function Students() {
-  // recent student data
-  const [students, setStudents] = useState ([
+  // store all student records
+  const [students, setStudents] = useState([
     { id: 1, name: "Alice Johnson", email: "alice@example.com", course: "Software Engineering" },
     { id: 2, name: "Brian Lee", email: "brian@example.com", course: "Computer Science" },
     { id: 3, name: "Catherine Wong", email: "catherine@example.com", course: "Information Technology" },
   ]);
 
-  const [ showForm, setShowForm ] = useState(false);
+  // contrils whether the form modal is visible
+  const [showForm, setShowForm] = useState(false);
+
+  // stores the student currentlt being edited
+  // null means wee ar enot editing anyone
+  const [editingStudent, setEditingStudent] = useState(null);
 
   // add students
   const handleAddStudent = (newStudent) => {
-    setStudents((prevStudents)=> [...prevStudents, newStudent]);
+    setStudents((prevStudents) => [...prevStudents, newStudent]);
   };
 
   // delete students
@@ -23,6 +28,31 @@ function Students() {
       prevStudents.filter((student) => student.id !== id)
     );
   };
+
+  // start editing a student
+  // run when click edit button
+  const handleEditStudent = (student) => {
+    setEditingStudent(student);
+    setShowForm(true);
+  };
+
+  //Update existing student
+  const handleUpdateStudent = (updatedStudent) => {
+    setStudents((prevStudents) =>
+      prevStudents.map((student) =>
+        student.id === updatedStudent.id ? updatedStudent : student
+      )
+    );
+  };
+
+  //close the form mocal
+  //clear edittingstudent form
+  const handleCloseForm = () => {
+    setShowForm(false);
+    setEditingStudent(null);
+  };
+
+
 
   return (
     <div className="flex min-h-screen bg-gray-950 text-white">
@@ -36,8 +66,9 @@ function Students() {
           </div>
 
           <button
+            type="button"
             onClick={() => {
-              console.log("button here")
+              setEditingStudent(null)
               setShowForm(true)
             }}
             className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm font-medium transition"
@@ -67,13 +98,23 @@ function Students() {
                   <td className="px-6 py-4 text-gray-300">{student.email}</td>
                   <td className="px-6 py-4 text-gray-300">{student.course}</td>
                   <td classNmae="px-6 py-4">
-                    <button
-                      type="button"
-                      onClick={()=> handleDeleteStudent(student.id)}
-                      className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded-md text-sm transition"
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        onClick={() => handleEditStudent(student)}
+                        claseeName="bg-yellow-00 hover:bg-yellow-600 text-blac px-3 p-1 rounded-md text-sm transition"
                       >
-                        delete
+                        Edit
                       </button>
+
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteStudent(student.id)}
+                        className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded-md text-sm transition"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -84,7 +125,9 @@ function Students() {
         {showForm && (
           <StudentForm
             onAddStudent={handleAddStudent}
-            onClose={() => setShowForm(false)}
+            onUpdateStudent={handleUpdateStudent}
+            editingStudent={editingStudent}
+            onClose={handleCloseForm}
           />
         )}
       </main>

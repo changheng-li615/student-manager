@@ -50,7 +50,20 @@ function StudentForm({ onAddStudent, onUpdateStudent, editingStudent, onClose })
           setError("Please enter a valid email address.");
           return;
         }
-        
+
+        // if edit modee, update existing student
+        if (isEditMode) {
+          const updatedStudent = {
+            id: editingStudent.id,
+            name: trimmedName,
+            email: trimmedEmail,
+            course: trimmedCourse,
+          };
+
+          onUpdateStudent(updatedStudent);
+
+        } else {
+        //add mode
         //CREATE student data
         const newStudent = {
             id: Date.now(),
@@ -60,6 +73,7 @@ function StudentForm({ onAddStudent, onUpdateStudent, editingStudent, onClose })
         };
 
         onAddStudent(newStudent);
+      }
 
         //clear studentForm
         setFormData({
@@ -136,7 +150,7 @@ function StudentForm({ onAddStudent, onUpdateStudent, editingStudent, onClose })
               type="submit"
               className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition"
             >
-              Add
+              {isEditMode ? "Update" : "Add"}
             </button>
           </div>
         </form>
