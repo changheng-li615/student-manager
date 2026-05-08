@@ -1,3 +1,6 @@
 Component refacto: refact student.jsx into single Component
 students.jsx for data management
 studentTable.jsx for display table
+
+5/8
+length == 0 show the message

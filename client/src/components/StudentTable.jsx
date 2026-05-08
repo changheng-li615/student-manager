@@ -3,6 +3,20 @@
 // receives data and fucntion from the pareent component  through props.
 
 function StudentTable({ students, onEditStudent, onDeleteStudent }) {
+    //Empty state
+    if (students.length === 0){
+        return(
+            <div className="w-full bg-gray-900 border-gray-800 rounded-xl shadow-lg p-10 text-center">
+                <h2 className="text-xl font-semibold text-white mb-2">
+                    No students found
+                </h2>
+
+                <p className="text-gary-400">
+                    Click "Add student" to create your first student record.
+                </p>
+            </div>
+        )
+    }
     return(
         <div className="bg-gray-900 border border-gray-800 rounded-x1 shadow-lg overflow-hidden">
             <table className="w-full text-left">
