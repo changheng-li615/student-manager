@@ -1,0 +1,3 @@
+Component refacto: refact student.jsx into single Component
+students.jsx for data management
+studentTable.jsx for display table

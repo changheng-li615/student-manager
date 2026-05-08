@@ -1,6 +1,7 @@
 import Sidebar from "../components/Sidebar";
 import { useState } from "react";
 import StudentForm from "../components/StudentForm";
+import StudentTable from "../components/StudentTable";
 
 function Students() {
   // store all student records
@@ -77,50 +78,11 @@ function Students() {
           </button>
         </div>
 
-        <div className="bg-gray-900 border border-gray-800 rounded-xl shadow-lg overflow-hidden">
-          <table className="w-full text-left">
-            <thead className="bg-gray-800 text-gray-300 text-sm uppercase tracking-wide">
-              <tr>
-                <th className="px-6 py-4">Name</th>
-                <th className="px-6 py-4">Email</th>
-                <th className="px-6 py-4">Course</th>
-                <th classNmae="px-6 py-4">Actions</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {students.map((student) => (
-                <tr
-                  key={student.id}
-                  className="border-t border-gray-800 hover:bg-gray-800/50 transition"
-                >
-                  <td className="px-6 py-4 font-medium">{student.name}</td>
-                  <td className="px-6 py-4 text-gray-300">{student.email}</td>
-                  <td className="px-6 py-4 text-gray-300">{student.course}</td>
-                  <td classNmae="px-6 py-4">
-                    <div className="flex gap-2">
-                      <button
-                        type="button"
-                        onClick={() => handleEditStudent(student)}
-                        claseeName="bg-yellow-00 hover:bg-yellow-600 text-blac px-3 p-1 rounded-md text-sm transition"
-                      >
-                        Edit
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => handleDeleteStudent(student.id)}
-                        className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded-md text-sm transition"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <StudentTable
+          students={students}
+          onEditStudent={handleEditStudent}
+          onDeleteStudent={handleDeleteStudent}
+          />
 
         {showForm && (
           <StudentForm
