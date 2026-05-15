@@ -4,7 +4,7 @@ import StudentForm from "../components/StudentForm";
 import StudentTable from "../components/StudentTable";
 
 function Students() {
-  // store all student records
+  // store all example student records
   const [students, setStudents] = useState([
     { id: 1, name: "Alice Johnson", email: "alice@example.com", course: "Software Engineering" },
     { id: 2, name: "Brian Lee", email: "brian@example.com", course: "Computer Science" },
@@ -20,6 +20,9 @@ function Students() {
 
   // stores what user types into the search input
   const [searchQuery, setSearchQuery] = useState("");
+
+  // couse filter
+  const [courseFilter, setCourseFilter] = useState("All");
 
   // add students
   const handleAddStudent = (newStudent) => {
@@ -56,11 +59,20 @@ function Students() {
     setEditingStudent(null);
   };
 
+  const courseOptions = [
+    "All",
+    ...new Set(students.map((student) => student.course)),
+  ];
+
   //calculated from students and searchQuery
   //do not change the oringinal students array
-  const filteredStudents = students.filter((student) =>
-    student.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredStudents = students.filter((student) => {
+    const matchesSeach = student.name.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesCourse = courseFilter === "All" || student.course === courseFilter;
+
+    return matchesSeach && matchesCourse;
+  });
 
 
 
@@ -87,14 +99,27 @@ function Students() {
           </button>
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 flex flex-col md:flex-row gap-4">
           <input type="text"
                  value={searchQuery}
                  onChange={(e) => setSearchQuery(e.target.value)}
                  placeholder="Search students by name..."
                  className="w-full max-w-md px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white placeholder-grayy-5000 focus:outline-none focus:ring-2 focus:ring-bluue-500"
           />
+
+          <select
+          value={courseFilter}
+          onChange={(e) => setCourseFilter(e.target.value)}
+          className="w-full md:w-64 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-lue-500"
+          >
+          {courseOptions.map((course) => (
+            <option key={course} value={course}>
+              {course === "All" ? "All Courses" : course}
+            </option>
+          ))}
+          </select>
         </div>
+
         <StudentTable
           students={filteredStudents}
           onEditStudent={handleEditStudent}
