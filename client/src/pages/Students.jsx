@@ -18,6 +18,9 @@ function Students() {
   // null means wee ar enot editing anyone
   const [editingStudent, setEditingStudent] = useState(null);
 
+  // stores what user types into the search input
+  const [searchQuery, setSearchQuery] = useState("");
+
   // add students
   const handleAddStudent = (newStudent) => {
     setStudents((prevStudents) => [...prevStudents, newStudent]);
@@ -53,6 +56,12 @@ function Students() {
     setEditingStudent(null);
   };
 
+  //calculated from students and searchQuery
+  //do not change the oringinal students array
+  const filteredStudents = students.filter((student) =>
+    student.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
 
 
   return (
@@ -63,7 +72,7 @@ function Students() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold">Students</h1>
-            <p className="text-gray-400 mt-2">Manage and view student records</p>
+            <p className="text-gray-400 mt-2">Manage and view student records . Total: {students.length}</p>
           </div>
 
           <button
@@ -78,8 +87,16 @@ function Students() {
           </button>
         </div>
 
+        <div className="mb-6">
+          <input type="text"
+                 value={searchQuery}
+                 onChange={(e) => setSearchQuery(e.target.value)}
+                 placeholder="Search students by name..."
+                 className="w-full max-w-md px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white placeholder-grayy-5000 focus:outline-none focus:ring-2 focus:ring-bluue-500"
+          />
+        </div>
         <StudentTable
-          students={students}
+          students={filteredStudents}
           onEditStudent={handleEditStudent}
           onDeleteStudent={handleDeleteStudent}
           />

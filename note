@@ -4,3 +4,9 @@ studentTable.jsx for display table
 
 5/8
 length == 0 show the message
+
+5/15
+searchquery store user input
+setSearchQuery update searchquery
+student.name.toLowerCase().includes(searchquery.toLowerCase)
+includes(): used to check the searchquery in the student name
