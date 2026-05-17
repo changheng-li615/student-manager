@@ -2,11 +2,38 @@ Component refacto: refact student.jsx into single Component
 students.jsx for data management
 studentTable.jsx for display table
 
-5/8
-length == 0 show the message
-
 5/15
 searchquery store user input
 setSearchQuery update searchquery
+
 student.name.toLowerCase().includes(searchquery.toLowerCase)
 includes(): used to check the searchquery in the student name
+
+...new Set()
+This means that remove all duplicate element
+Set() is not normal array so we use ... at front of Set
+
+5/16
+establish server to build a full-stack project
+instruction at root file terminal:
+mkdir server
+cd server
+npm init -y
+
+in the server file:
+npm install express cors dotenv
+npm install -D nodemon
+express = create backend API server
+cors = allow frontend React investigate backend
+dotenv = read .env environment varible
+nodemon = restart server when developing
+
+express() create a backend application
+frontend need to send data with JSON format:
+app.use(express.json())
+backend receive data from req.body
+
+req = request from frontend e.g. browser request
+res = response from backend to frontend
+
+res.json({status: "OK"}) :backend response this JSON format messgae to browser

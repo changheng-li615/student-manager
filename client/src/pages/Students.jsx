@@ -74,6 +74,8 @@ function Students() {
     return matchesSeach && matchesCourse;
   });
 
+  const resultCount = filteredStudents.length;
+  const totalCount = students.length;
 
 
   return (
@@ -81,6 +83,7 @@ function Students() {
       <Sidebar />
 
       <main className="flex-1 p-8">
+       <div className="w-full max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold">Students</h1>
@@ -120,6 +123,11 @@ function Students() {
           </select>
         </div>
 
+        <div className="mb-4 text-sm text-gray-400">
+          Showing {resultCount} of {totalCount} students
+
+        </div>
+
         <StudentTable
           students={filteredStudents}
           onEditStudent={handleEditStudent}
@@ -134,6 +142,7 @@ function Students() {
             onClose={handleCloseForm}
           />
         )}
+       </div>
       </main>
     </div>
   );
